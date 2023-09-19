@@ -1,88 +1,58 @@
-import { IUser } from '@src/models/User';
-import { getRandomInt } from '@src/util/misc';
 import orm from './MockOrm';
-
-
-// **** Functions **** //
-
-/**
- * Get one user.
- */
-async function getOne(email: string): Promise<IUser | null> {
-  const db = await orm.openDb();
-  for (const user of db.users) {
-    if (user.email === email) {
-      return user;
-    }
-  }
-  return null;
-}
+import { Job } from '../models/Job';
+import { Candidate } from '../models/Candidate';
 
 /**
- * See if a user with the given id exists.
+ * See if a job with the given ID exists.
  */
 async function persists(id: number): Promise<boolean> {
   const db = await orm.openDb();
-  for (const user of db.users) {
-    if (user.id === id) {
+  for (const job of db.jobs) {
+    if (job.id === id) {
       return true;
     }
   }
   return false;
 }
 
-/**
- * Get all users.
- */
-async function getAll(): Promise<IUser[]> {
+async function getAll(): Promise<Job[]> {
   const db = await orm.openDb();
-  return db.users;
+  return db.jobs;
 }
 
-/**
- * Add one user.
- */
-async function add(user: IUser): Promise<void> {
+async function update(job: Job): Promise<void> {
   const db = await orm.openDb();
-  user.id = getRandomInt();
-  db.users.push(user);
-  return orm.saveDb(db);
-}
-
-/**
- * Update a user.
- */
-async function update(user: IUser): Promise<void> {
-  const db = await orm.openDb();
-  for (let i = 0; i < db.users.length; i++) {
-    if (db.users[i].id === user.id) {
-      db.users[i] = user;
+  for (let i = 0; i < db.jobs.length; i++) {
+    if (db.jobs[i].id === job.id) {
+      db.jobs[i] = job;
       return orm.saveDb(db);
     }
   }
 }
 
-/**
- * Delete one user.
- */
-async function delete_(id: number): Promise<void> {
+async function getCandidatesById(id: number): Promise<Candidate[]> {
   const db = await orm.openDb();
-  for (let i = 0; i < db.users.length; i++) {
-    if (db.users[i].id === id) {
-      db.users.splice(i, 1);
-      return orm.saveDb(db);
+  for (let i = 0; i < db.jobs.length; i++) {
+    if (db.jobs[i].id === id) {
+      return db.jobs[i].candidates;
     }
   }
+  return [];
+}
+
+async function deleteCandidatesByJobId(
+  jobId: number,
+  candidateId: number): Promise<void> { 
+  // Remove specifiedc candidate
 }
 
 
 // **** Export default **** //
 
 export default {
-  getOne,
   persists,
   getAll,
-  add,
   update,
-  delete: delete_,
+  getCandidatesById,
+  deleteCandidatesByJobId,
 } as const;
