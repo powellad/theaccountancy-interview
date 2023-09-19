@@ -14,6 +14,8 @@ Starting fresh on a new project can be difficult and can vary greatly between de
 
 Vite is a useful front-end tool for scaffolding new projects. I've used it a number of times and it's always been a good place to start.
 
+I'll be using Vite to scaffold a React+TypeScript project, as well as using Redux Toolkit for handling global state.
+
 ## Consequences
 
 Once created, you're partly "stuck" with Vite until you eject the application.

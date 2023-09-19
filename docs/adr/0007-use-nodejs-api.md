@@ -17,6 +17,8 @@ A Node.js-based app using Express will be used for this.
 I don't have a huge amount of experience in using Node.js as an API, but it uses my existing
 skillset and would likely be the better choice (for me) over Python.
 
+As I've not much experience on this side, I'll be using an [Express+TypeScript generator](https://github.com/seanpmaxwell/express-generator-typescript).
+
 ## Consequences
 
 Node.js can suffer a bit when it comes to performance, especially with larger queries.
