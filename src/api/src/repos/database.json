@@ -1,1 +1,34 @@
-{"users":[{"name":"Sean Maxwell","email":"sean.maxwell@gmail.com","pwdHash":"$2b$12$1mE2OI9hMS/rgH9Mi0s85OM2V5gzm7aF3gJIWH1y0S1MqVBueyjsy","role":1,"id":159123164363},{"name":"Gordan Freeman","email":"gordan.freeman@halflife.com","pwdHash":"$2b$12$1mE2OI9hMS/rgH9Mi0s85OM2V5gzm7aF3gJIWH1y0S1MqVBueyjsy","role":0,"id":906524522143},{"name":"John Smith","email":"jsmith@yahoo.com","pwdHash":"$2b$12$1mE2OI9hMS/rgH9Mi0s85OM2V5gzm7aF3gJIWH1y0S1MqVBueyjsy","role":0,"id":357437875835}]}
+{
+    "jobs": [
+        {
+            "id": 123,
+            "title": "Marketing Exec 1",
+            "location": "London",
+            "description": "Marketing exec job 1",
+            "candidates": []
+        },
+        {
+            "id": 124,
+            "title": "Marketing Exec 2",
+            "location": "London",
+            "description": "Marketing exec job 2",
+            "candidates": []
+        },
+        {
+            "id": 125,
+            "title": "Marketing Exec 3",
+            "location": "London",
+            "description": "Marketing exec job 3",
+            "candidates": []
+        }
+    ],
+    "candidates": [
+        {
+            "id": 1234,
+            "name": "Joe A",
+            "email": "joe@joe.com",
+            "phoneNumber": "+44123456789",
+            "applicationDate": "2023-09-19T14:06:38+0000"
+        }
+    ]
+}
