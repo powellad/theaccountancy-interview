@@ -1,42 +1,40 @@
-import UserRepo from '@src/repos/UserRepo';
-import { IUser } from '@src/models/User';
-import { RouteError } from '@src/other/classes';
-import HttpStatusCodes from '@src/constants/HttpStatusCodes';
+import JobRepo from '../repos/JobRepo';
+import { Job } from '../models/Job';
+import { RouteError } from '../other/classes';
+import HttpStatusCodes from '../constants/HttpStatusCodes';
+import { Candidate } from '../models/Candidate';
 
-function getAll(): Promise<IUser[]> {
-  return UserRepo.getAll();
-}
-function addOne(user: IUser): Promise<void> {
-  return UserRepo.add(user);
+function getAll(): Promise<Job[]> {
+  return JobRepo.getAll();
 }
 
-async function updateOne(user: IUser): Promise<void> {
-  const persists = await UserRepo.persists(user.id);
+async function update(job: Job): Promise<void> {
+  const persists = await JobRepo.persists(job.id);
   if (!persists) {
     throw new RouteError(
       HttpStatusCodes.NOT_FOUND,
-      USER_NOT_FOUND_ERR,
+      'Job not found.',
     );
   }
-  // Return user
-  return UserRepo.update(user);
+  
+  return JobRepo.update(job);
 }
 
-async function _delete(id: number): Promise<void> {
-  const persists = await UserRepo.persists(id);
-  if (!persists) {
-    throw new RouteError(
-      HttpStatusCodes.NOT_FOUND,
-      USER_NOT_FOUND_ERR,
-    );
-  }
-  // Delete user
-  return UserRepo.delete(id);
+function getCandidatesById(jobId: number): Promise<Candidate[]> {
+  return JobRepo.getCandidatesById(jobId);
+}
+
+function deleteCandidatesByJobId(
+  jobId: number,
+  candidateId: number): Promise<void> {
+
+  return JobRepo.deleteCandidatesByJobId(jobId, candidateId);
 }
 
 
 export default {
   getAll,
-  addOne,
-  updateOne,
+  update,
+  getCandidatesById,
+  deleteCandidatesByJobId,
 } as const;

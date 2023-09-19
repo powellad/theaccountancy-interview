@@ -15,13 +15,16 @@ async function updateJob(req: IReq<{job: Job}>, res: IRes) {
   return res.status(HttpStatusCodes.OK).end();
 }
 
-async function getCandidates(_: IReq, res: IRes) {
-  const candidates = await JobService.getCandidatesById();
+async function getCandidates(req: IReq, res: IRes) {
+  const jobId = +req.params.jobId;
+  const candidates = await JobService.getCandidatesById(jobId);
   return res.status(HttpStatusCodes.OK).json({ candidates });
 }
 
-async function deleteCandidate(_: IReq, res: IRes) {
-  await JobService.deleteCandidatesByJobId(id, candidateId);
+async function deleteCandidate(req: IReq, res: IRes) {
+  const jobId = +req.params.jobId;
+  const candidateId = +req.params.candidateId;
+  await JobService.deleteCandidatesByJobId(jobId, candidateId);
   return res.status(HttpStatusCodes.OK);
 }
 
