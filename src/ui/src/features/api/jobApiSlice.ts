@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Job } from "../../models/Job";
-import { mapJobResponse } from "./mappers";
+import { mapCandidatesResponse, mapJobResponse } from "./mappers";
 import { JobResponse } from "./responses/JobResponse";
+import { Candidate } from "../../models/Candidate";
+import { CandidateResponse } from "./responses/CandidateResponse";
 
 export const apiSlice = createApi({
   reducerPath: "api",
@@ -14,14 +16,18 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getJob: builder.query<Job, { jobId: number }>({
       query: ({ jobId }) => ({
-        url: "/jobs/",
-        params: {
-          jobId,
-        },
+        url: `/jobs/${jobId}`,
       }),
       transformResponse: (response: JobResponse) => mapJobResponse(response),
+    }),
+    getCandidatesForJob: builder.query<Candidate[], { jobId: number }>({
+      query: ({ jobId }) => ({
+        url: `/jobs/${jobId}/candidates`,
+      }),
+      transformResponse: (response: CandidateResponse[]) =>
+        mapCandidatesResponse(response),
     }),
   }),
 });
 
-export const { useGetJobQuery } = apiSlice;
+export const { useGetJobQuery, useGetCandidatesForJobQuery } = apiSlice;
