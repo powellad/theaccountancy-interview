@@ -3,10 +3,6 @@
  */
 export default {
   Base: '/api',
-  Candidates: {
-    Base: '/candidates',
-    Get: '/:id',
-  },
   Jobs: {
     Base: '/jobs',
     Get: '/',
